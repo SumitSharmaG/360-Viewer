@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Switcher Project</title>
+    <title>360 Degree Viewer Project</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>My GitHub Project</h1>
-        <p>Click the red cross to change the image!</p>
-
-        <div class="image-box" id="imageCard">
-            <img src="default-pic.jpg" id="mainImage" alt="Default Profile">
+    <div class="main-wrapper">
+        <h1 class="title">Interactive 360° View</h1>
+        
+        <div class="viewer-box">
+            <div id="panorama"></div>
             
-            <button id="closeBtn" title="Remove & Change">&times;</button>
+            <button id="closeBtn" title="Change Image">&times;</button>
             
-            <input type="file" id="imageInput" accept="image/*">
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
         </div>
+        
+        <p class="instruction">Red cross par click karke apni 360 photo upload karein!</p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
