@@ -1,27 +1,45 @@
-// Elements ko select karna
+// 1. Pannellum Viewer ko initial image ke sath setup karna
+let viewer = pannellum.viewer('panorama', {
+    "type": "equirectangular",
+    "panorama": "default-pic.jpg", // Aapki default photo ka path
+    "autoLoad": true,
+    "autoRotate": -2,     // Auto-rotation speed (- means right to left)
+    "showControls": true,
+    "compass": true      // Compass dikhane ke liye
+});
+
 const closeBtn = document.getElementById('closeBtn');
 const imageInput = document.getElementById('imageInput');
-const mainImage = document.getElementById('mainImage');
 
-// Jab red cross button par click ho
+// 2. Jab user Red Cross button par click kare
 closeBtn.addEventListener('click', () => {
-    // Hidden file input ko trigger karna
+    // Hidden file picker ko click karwana
     imageInput.click();
 });
 
-// Jab user file select karle
+// 3. Jab user apni file select kare
 imageInput.addEventListener('change', function() {
     const file = this.files[0];
-
+    
     if (file) {
         const reader = new FileReader();
-
-        // Jab file read ho jaye
+        
         reader.onload = function(e) {
-            // Purani image ka source badal kar nayi image ka data rakh dena
-            mainImage.src = e.target.result;
+            const newImageData = e.target.result;
+            
+            // Purane viewer ko destroy karna zaroori hai naya load karne ke liye
+            viewer.destroy();
+            
+            // Nayi photo ke sath viewer ko dobara banana
+            viewer = pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": newImageData,
+                "autoLoad": true,
+                "autoRotate": -2
+            });
         }
-
+        
+        // Image ko as DataURL read karna
         reader.readAsDataURL(file);
     }
 });
